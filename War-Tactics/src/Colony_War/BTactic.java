@@ -11,13 +11,13 @@ public class BTactic extends Tactic{
        
 		if(CurrentTime % 2 == 0)
 		{
-			//current time is even
+			//when current time is even
 			int rand_num = random.nextInt(250);
 			return rand_num * 2 +2; // returns an even random number between 2 and 500
 		}
 		else
 		{
-			//current time is odd
+			//when current time is odd
 			int rand_num = random.nextInt(250);
 			return rand_num *2 + 501; // returns an even random number between 501 and 999
 
