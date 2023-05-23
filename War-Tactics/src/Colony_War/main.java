@@ -6,7 +6,9 @@ public class main {
 	{
 		Colony cl = new Colony(100,'a');
 		
-		System.out.println("Army strenght " + cl.ArmyStrength);
+		cl.chooseTactic();
+		int army = cl.getArmyStrength();
+		System.out.println("Army strenght ");
 	}
 
 }
