@@ -2,10 +2,13 @@ package Colony_War;
 import java.util.Random;
 import java.time.Instant;
 
-public class BTactic extends Tactic{
+public  class BTactic extends Tactic{
 
 	@Override
-    public int War() {
+    public int Strength() 
+	{
+		System.out.println("B tactic has been used");
+		
 		Random random = new Random();
 		long CurrentTime = Instant.now().toEpochMilli();
        

@@ -7,9 +7,9 @@ public class AProduction extends Production {
 	public AProduction() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
-	public int Produce()
+	public int Production_Rate()
 	{
 		Random random = new Random();
 		

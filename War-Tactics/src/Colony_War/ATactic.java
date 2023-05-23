@@ -7,7 +7,8 @@ public class ATactic extends Tactic {
 	}
 	
 	@Override
-    public int War() {
+    public int Strength() {
+		System.out.println("A tactic has been used");
 		Random random = new Random();
 		int random1 = random.nextInt(500)+1; // Generate random number between 1 to 500
 		int random2 = random.nextInt(500)+501; // Generate random number between 500 to 501

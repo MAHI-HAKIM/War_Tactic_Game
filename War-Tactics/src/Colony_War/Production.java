@@ -1,9 +1,7 @@
 package Colony_War;
 
-public class Production {
+public abstract class Production {
 
-	public Production() {
-		// TODO Auto-generated constructor stub
-	}
+	public abstract int Production_Rate();
 
 }
