@@ -7,6 +7,7 @@ public class Colony {
 	private char Symbol;
 	private int Population;
 	private int FoodStock;
+	private String status;
 	public int Win;
 	public int Loss;
 	private boolean isActive;
@@ -21,8 +22,17 @@ public class Colony {
 		this.Win = 0;
 		this.Loss = 0;
 		this.isActive = true;
+		this.status = "Active";
 	}
 	
+	 public void setStatus(String status) {
+	        this.status = status;
+	    }
+
+	    public String getStatus() {
+	        return this.status;
+	    }
+    
 	// getter for name
     public char getSymbol() {
         return this.Symbol;

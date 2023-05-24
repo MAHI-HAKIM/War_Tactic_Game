@@ -1,11 +1,13 @@
 package Colony_War;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
     private List<Colony> colonyList;
+    
     private int roundNum;
 
     public Game() {
@@ -79,6 +81,12 @@ public class Game {
         // Ensure foodStock doesn't go below 0
         if (one.getFoodStock() < 0) one.setFoodStock(0);
         if (two.getFoodStock() < 0) two.setFoodStock(0);
+        
+        // Ensure population doesn't go below 0
+        if (one.getPopulation() < 0) one.setPopulation(0);;
+        if (two.getPopulation() < 0) two.setPopulation(0);;
+        
+        printStatus();
     }
 
     void declareWar() {
@@ -92,6 +100,7 @@ public class Game {
                 // only consider colonies that are still active
                 if (this.colonyList.get(i).isActive()) {
                     activeColonies++;
+                    this.colonyList.get(i).setStatus("Active");
 
                     // loop over all other colonies
                     for (int j = 0; j < this.colonyList.size(); j++) {
@@ -99,13 +108,14 @@ public class Game {
                         if (i != j && this.colonyList.get(j).isActive()) {
                             this.roundFight(this.colonyList.get(i), this.colonyList.get(j));
                             this.roundNum++;
-
                             // check if either colony has been defeated
-                            if (this.colonyList.get(i).getPopulation() < 2 || this.colonyList.get(i).getFoodStock() < 2) {
+                            if (this.colonyList.get(i).getPopulation() < 2 || this.colonyList.get(i).getFoodStock() < 1) {
                                 this.colonyList.get(i).setActive(false);
+                                this.colonyList.get(i).setStatus("---");
                             }
-                            if (this.colonyList.get(j).getPopulation() < 2 || this.colonyList.get(j).getFoodStock() < 2) {
+                            if (this.colonyList.get(j).getPopulation() < 2 || this.colonyList.get(j).getFoodStock() < 1) {
                                 this.colonyList.get(j).setActive(false);
+                                this.colonyList.get(j).setStatus("---");
                             }
                         }
                     }
@@ -114,26 +124,61 @@ public class Game {
 
             // continue the game as long as there is more than one active colony
         } while (activeColonies > 1);
+
+        // After the loop, there is only one colony left. We set it as the winner.
+        for (Colony colony : this.colonyList) {
+            if (colony.isActive()) {
+                colony.setStatus("Winner");
+                break;
+            }
+        }
     }
 
     public void printStatus() {
-    	
-    	System.out.println("\nRound : " + this.roundNum +"\n");
-    	
+        clearScreen();
+        System.out.println("\nRound : " + this.roundNum +"\n");
+
+        System.out.println("------------------------------------------------------------------------------------------");
+
         // print the table header
         System.out.printf("%-13s %-15s %-16s %-15s %-15s %-15s%n", "|Colony|", "|Population|", "|FoodStock|", "|Wins|", "|Losses|", "|Status|");
-    	System.out.printf("%-13s %-15s %-16s %-15s %-15s %-15s\n", "--------", "------------", "-----------", "------", "--------", "--------");
+        System.out.printf("%-13s %-15s %-16s %-15s %-15s %-15s\n", "--------", "------------", "-----------", "------", "--------", "--------");
 
         // iterate through all the colonies and print their status
         for (Colony colony : colonyList) {
-            String status = colony.isActive() ? "(WINNER)" : "Defeated";
-            System.out.printf("%-15c %-15d %-15d %-15d %-15d %-15s\n",
-            		colony.getSymbol(),
-            		colony.getPopulation(),
-            		colony.getFoodStock(),
-            		colony.getWins(),
-            		colony.getLosses(), 
-            		status);
+            if (colony.isActive() || colony.getStatus().equals("Winner")) {
+                System.out.printf("%-15c %-15d %-15d %-15d %-15d %-15s\n",
+                        colony.getSymbol(),
+                        colony.getPopulation(),
+                        colony.getFoodStock(),
+                        colony.getWins(),
+                        colony.getLosses(), 
+                        colony.getStatus());
+            } else {
+                System.out.printf("%-15c %-15s %-15s %-15s %-15s %-15s\n",
+                        colony.getSymbol(),
+                        "---",
+                        "---",
+                        "---",
+                        "---", 
+                        colony.getStatus());
+            }
         }
+        System.out.println("------------------------------------------------------------------------------------------");
+    }
+
+
+    
+    public static void clearScreen() {  
+    	try {
+    	    if (System.getProperty("os.name").contains("Windows")) {
+    	        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    	    } else {
+    	        Runtime.getRuntime().exec("clear");
+    	    }
+    	} catch (IOException | InterruptedException ex) {
+    	    ex.printStackTrace();
+    	}
+
     }
 }

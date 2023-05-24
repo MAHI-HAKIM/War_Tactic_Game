@@ -53,8 +53,6 @@ public class main {
            
         	int population = Integer.parseInt(populationStr.trim());
 
-
-
             Colony colony = new Colony(population,SymbolGenerator.getNextSymbol() );
 
             game.addColonies(colony);
