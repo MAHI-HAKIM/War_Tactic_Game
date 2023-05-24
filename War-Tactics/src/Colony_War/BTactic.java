@@ -7,7 +7,6 @@ public  class BTactic extends Tactic{
 	@Override
     public int Strength() 
 	{
-		System.out.println("B tactic has been used");
 		
 		Random random = new Random();
 		long CurrentTime = Instant.now().toEpochMilli();

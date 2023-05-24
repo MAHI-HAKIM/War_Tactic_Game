@@ -85,7 +85,7 @@ public class Colony {
 	        this.Loss++;
 	    }
 	
-	public void ChooseTactic() { //Chooses the Tactic on weather its A or B
+	public void chooseTactic() { //Chooses the Tactic on weather its A or B
 		
 	    Random random = new Random();
 	    if (random.nextBoolean())
@@ -98,7 +98,7 @@ public class Colony {
 	    
 	 }
 	
-	public int GetArmyStrength() {
+	public int getArmyStrength() {
         // Ensure that a tactic has been chosen before calling this method
         if (this.tactic == null) {
             throw new IllegalStateException("Tactic must be chosen before getting army strength.");
@@ -107,7 +107,7 @@ public class Colony {
         return this.tactic.Strength();
     }
 	
-	public void ChooseProductionRate() { //Chooses the Production Type on weather its A or B
+	public void chooseProductionRate() { //Chooses the Production Type on weather its A or B
 		
 	    Random random = new Random();
 	    if (random.nextBoolean())
@@ -120,7 +120,7 @@ public class Colony {
 	    
 	 }
 	
-	public int GetProductionRate() {
+	public int getProductionRate() {
         // Ensure that a Production has been chosen before calling this method
         if (this.production == null) 
         {
