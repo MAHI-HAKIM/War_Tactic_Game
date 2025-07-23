@@ -1,1 +1,1 @@
- a tactical war game designed with Java using DSA algorithm for 
+game designed with Java using DSA algorithm for 
