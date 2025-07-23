@@ -1,1 +1,1 @@
-game designed with Java using DSA algorithm for 
+ Java using DSA algorithm for 
